@@ -1,0 +1,63 @@
+asyncapi: 2.0.0
+
+#
+# Overal information for users of the application
+#
+info:
+  title: Chatbot Async Api
+  version: '1.0.0'
+  description: |
+    To handle async requirements for Chatsuit
+#
+# Details on how to connect to the application
+#
+servers:
+  dev:
+    url: localhost
+    protocol: ws
+
+#
+# Details about all the channels that you can listen to or send to messages
+#
+channels:
+  /chat:
+    subscribe:
+      summary: Client can receive chat messages.
+      operationId: subChatMessage
+      message:
+        $ref: '#/components/messages/chatMessage'
+    publish:
+      summary: Client can send chat messages.
+      operationId: pubChatMessage
+      message:
+        $ref: '#/components/messages/chatMessage'
+
+#
+# All reusable parts for readability and staying DRY
+#
+components:
+  messages:
+    chatMessage:
+      summary: Message that you send or receive from chat
+      payload:
+        type: string
+
+  securitySchemes:
+      apiKey:
+        type: apiKey
+        in: user
+        description: Provide your API key as the user and leave the password empty.
+      supportedOauthFlows:
+        type: oauth2
+        flows:
+          implicit:
+            authorizationUrl: http://localhost:8083/auth/realms/master
+            scopes:
+              write:profile: write profile
+              read:profile: read profile
+          authorizationCode:
+            authorizationUrl: http://localhost:8083/auth/realms/master
+            tokenUrl: http://localhost:8083/auth/realms/master/protocol/openid-connect/token
+            scopes:
+              write:profile: write profile
+              read:profile: read profile
