@@ -1,0 +1,14 @@
+{
+  "name": "chatbot-async-api",
+  "description": "To handle async requirements for Chatsuit ",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/api/index.js"
+  },
+  "dependencies": {
+    "@asyncapi/parser": "^1.6.0",
+    "express": "4.17.1",
+    "express-ws": "4.0.0",
+    "node-yaml-config": "0.0.6"
+  }
+}
