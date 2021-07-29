@@ -12,7 +12,7 @@ info:
 # Details on how to connect to the application
 #
 servers:
-  dev:
+  swamp:
     url: localhost
     protocol: ws
 
